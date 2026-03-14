@@ -1,0 +1,104 @@
+{
+  "name": "historical-adoption-of-technology",
+  "title": "Historical Adoption of Technology (CHAT)",
+  "description": "Cross-country Historical Adoption of Technology (CHAT) — an unbalanced panel dataset with adoption data for over 100 technologies in more than 150 countries from 1800 to 2008. Compiled by Diego Comin and Bart Hobijn at the National Bureau of Economic Research (NBER).",
+  "licenses": [
+    {
+      "name": "ODC-PDDL",
+      "title": "Open Data Commons Public Domain Dedication and License",
+      "path": "https://opendatacommons.org/licenses/pddl/"
+    }
+  ],
+  "sources": [
+    {
+      "title": "NBER — The CHAT Dataset (Comin & Hobijn, 2009)",
+      "path": "http://www.nber.org/papers/w15319"
+    }
+  ],
+  "views": [
+    {
+      "name": "global-technology-adoption",
+      "title": "Global Technology Adoption 1980–2008",
+      "resources": ["historical-adoption-of-technology"],
+      "specType": "vega-lite",
+      "spec": {
+        "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+        "transform": [
+          { "filter": "toNumber(datum.year) >= 1980" },
+          { "fold": ["cellphone", "internetuser", "tv", "telephone"], "as": ["technology", "raw_value"] },
+          { "calculate": "toNumber(datum.raw_value)", "as": "value" },
+          { "filter": "isValid(datum.value) && datum.value > 0" },
+          { "aggregate": [{ "op": "sum", "field": "value", "as": "total" }], "groupby": ["year", "technology"] }
+        ],
+        "layer": [
+          {
+            "mark": { "type": "line", "strokeWidth": 2, "point": { "size": 40, "filled": true } },
+            "encoding": {
+              "x": {
+                "field": "year",
+                "type": "ordinal",
+                "title": "Year",
+                "axis": { "grid": false, "labelAngle": -45 }
+              },
+              "y": {
+                "field": "total",
+                "type": "quantitative",
+                "scale": { "type": "log" },
+                "title": "Global Total (log scale)",
+                "axis": { "grid": false }
+              },
+              "color": {
+                "field": "technology",
+                "type": "nominal",
+                "legend": { "title": "Technology" }
+              },
+              "tooltip": [
+                { "field": "technology", "type": "nominal", "title": "Technology" },
+                { "field": "year", "type": "ordinal", "title": "Year" },
+                { "field": "total", "type": "quantitative", "format": ".3s", "title": "Global Total" }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "resources": [
+    {
+      "path": "data/chat.csv",
+      "name": "historical-adoption-of-technology",
+      "title": "Historical Adoption of Technology",
+      "description": "Unbalanced panel dataset covering adoption of 100+ technologies in 150+ countries, 1750–2008. Each row is a country-year observation. Technology columns contain adoption units (varies by technology).",
+      "mediatype": "text/csv",
+      "schema": {
+        "fields": [
+          { "name": "country_name", "type": "string", "description": "Country name" },
+          { "name": "year", "type": "integer", "description": "Year of observation" },
+          { "name": "cellphone", "type": "number", "description": "Mobile/cellular telephone subscriptions" },
+          { "name": "telephone", "type": "number", "description": "Fixed telephone lines" },
+          { "name": "internetuser", "type": "number", "description": "Internet users" },
+          { "name": "computer", "type": "number", "description": "Personal computers" },
+          { "name": "tv", "type": "number", "description": "Television sets" },
+          { "name": "radio", "type": "number", "description": "Radio receivers" },
+          { "name": "vehicle_car", "type": "number", "description": "Passenger cars" },
+          { "name": "vehicle_com", "type": "number", "description": "Commercial vehicles" },
+          { "name": "elecprod", "type": "number", "description": "Electricity production (kWh)" },
+          { "name": "railline", "type": "number", "description": "Railway lines (km)" },
+          { "name": "railpkm", "type": "number", "description": "Railway passenger-kilometres" },
+          { "name": "railtkm", "type": "number", "description": "Railway freight tonne-kilometres" },
+          { "name": "atm", "type": "number", "description": "Automated teller machines (ATMs)" },
+          { "name": "newspaper", "type": "number", "description": "Daily newspaper circulation" },
+          { "name": "mail", "type": "number", "description": "Pieces of mail handled" },
+          { "name": "telegram", "type": "number", "description": "Telegrams sent" },
+          { "name": "fert_total", "type": "number", "description": "Fertilizer consumption (metric tons)" },
+          { "name": "ag_tractor", "type": "number", "description": "Agricultural tractors" },
+          { "name": "xlpopulation", "type": "number", "description": "Total population" },
+          { "name": "xlrealgdp", "type": "number", "description": "Real GDP" },
+          { "name": "pctivliteracy", "type": "number", "description": "Literacy rate (%)" },
+          { "name": "pctimmunizdpt", "type": "number", "description": "DPT immunization rate (%)" },
+          { "name": "pctimmunizmeas", "type": "number", "description": "Measles immunization rate (%)" }
+        ]
+      }
+    }
+  ]
+}

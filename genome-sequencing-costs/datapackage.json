@@ -1,0 +1,62 @@
+{
+  "name": "genome-sequencing-costs",
+  "title": "Genome Sequencing Costs",
+  "description": "The cost of DNA sequencing has fallen faster than Moore's Law. Since 2001, the National Human Genome Research Institute (NHGRI) has tracked costs at its funded sequencing centers — from $95 million per genome in 2001 to around $500 today. A dramatic inflection occurred in 2008 with the arrival of next-generation sequencing, compressing a decade of cost reduction into a single year.",
+  "homepage": "https://www.genome.gov/about-genomics/fact-sheets/DNA-Sequencing-Costs-Data",
+  "version": "2022-05",
+  "licenses": [
+    {
+      "name": "ODC-PDDL-1.0",
+      "path": "http://opendatacommons.org/licenses/pddl/",
+      "title": "Open Data Commons Public Domain Dedication and License v1.0"
+    }
+  ],
+  "sources": [
+    {
+      "name": "National Human Genome Research Institute (NHGRI)",
+      "path": "https://www.genome.gov/about-genomics/fact-sheets/DNA-Sequencing-Costs-Data",
+      "title": "DNA Sequencing Costs: Data"
+    }
+  ],
+  "resources": [
+    {
+      "name": "sequencing-costs",
+      "path": "data/sequencing_costs.csv",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "schema": {
+        "fields": [
+          {
+            "name": "Date",
+            "type": "date",
+            "format": "any",
+            "description": "Date of measurement (YYYY-MM)"
+          },
+          {
+            "name": "Cost per Mb",
+            "type": "number",
+            "description": "Cost in USD to sequence one megabase (one million bases) of DNA at a specified quality"
+          },
+          {
+            "name": "Cost per Genome",
+            "type": "number",
+            "description": "Cost in USD to sequence a complete human-sized genome (~3.2 billion base pairs)"
+          }
+        ]
+      }
+    }
+  ],
+  "views": [
+    {
+      "name": "cost-per-genome",
+      "title": "Cost to sequence a human genome (USD)",
+      "resourceName": "sequencing-costs",
+      "specType": "simple",
+      "spec": {
+        "type": "line",
+        "group": "Date",
+        "series": ["Cost per Genome"]
+      }
+    }
+  ]
+}

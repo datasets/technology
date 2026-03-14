@@ -1,0 +1,58 @@
+{
+  "name": "cloud-providers-pricing",
+  "title": "Cloud Providers Pricing Over Time",
+  "description": "Historical pricing for cloud storage and compute services (AWS S3, GCP, Azure) from launch to present. Documents the dramatic decline in cloud infrastructure costs over two decades.",
+  "status": "structured",
+  "licenses": [{ "name": "ODC-PDDL-1.0", "path": "http://opendatacommons.org/licenses/pddl/", "title": "Open Data Commons Public Domain Dedication and License v1.0" }],
+  "resources": [
+    {
+      "name": "storage_pricing",
+      "path": "data/storage_pricing.csv",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "encoding": "utf-8",
+      "schema": {
+        "fields": [
+          {
+            "name": "date",
+            "type": "date",
+            "format": "any"
+          },
+          {
+            "name": "provider",
+            "type": "string"
+          },
+          {
+            "name": "service",
+            "type": "string"
+          },
+          {
+            "name": "price_per_gb_usd",
+            "type": "number"
+          }
+        ]
+      }
+    }
+  ],
+  "views": [
+    {
+      "name": "storage-pricing-over-time",
+      "title": "Cloud Storage Pricing Over Time",
+      "specType": "simple",
+      "type": "graph",
+      "transform": [
+        {
+          "type": "filter",
+          "expressions": [
+            { "property": "provider", "in": ["aws", "gcp", "azure"] }
+          ]
+        }
+      ],
+      "props": {
+        "x": "date",
+        "y": "price_per_gb_usd",
+        "group": "provider"
+      }
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+date,provider,service,price_per_gb_usd
+2006-03,aws,s3-standard,0.150
+2010-01,aws,s3-standard,0.140
+2012-01,aws,s3-standard,0.090
+2014-04,aws,s3-standard,0.030
+2016-12,aws,s3-standard,0.023
+2021-01,aws,s3-standard,0.023
+2010-01,gcp,cloud-storage,0.170
+2013-01,gcp,cloud-storage,0.120
+2014-12,gcp,cloud-storage,0.026
+2021-01,gcp,cloud-storage,0.020
+2010-01,azure,blob-storage,0.150
+2012-01,azure,blob-storage,0.125
+2014-05,azure,blob-storage,0.024
+2021-01,azure,blob-storage,0.021

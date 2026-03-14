@@ -1,0 +1,48 @@
+{
+  "name": "adoption-rates-technology",
+  "title": "Technology Adoption Rates (US)",
+  "description": "Share of US households or population using key technologies over time: telephone, radio, television, personal computer, internet, mobile phone, smartphone. Each technology wave adopted faster than the last.",
+  "status": "structured",
+  "licenses": [
+    {
+      "name": "ODC-PDDL-1.0",
+      "path": "http://opendatacommons.org/licenses/pddl/",
+      "title": "Open Data Commons Public Domain Dedication and License v1.0"
+    }
+  ],
+  "resources": [
+    {
+      "name": "adoption-rates",
+      "title": "US Technology Adoption Rates (Long Format)",
+      "path": "data/adoption_rates.csv",
+      "mediatype": "text/csv"
+    },
+    {
+      "name": "adoption-rates-wide",
+      "title": "US Technology Adoption Rates (Wide Format)",
+      "path": "data/adoption_rates_wide.csv",
+      "mediatype": "text/csv"
+    }
+  ],
+  "views": [
+    {
+      "name": "us-technology-adoption-over-time",
+      "title": "US Technology Adoption Over Time",
+      "specType": "simple",
+      "resources": ["adoption-rates-wide"],
+      "spec": {
+        "type": "line",
+        "group": "year",
+        "series": [
+          "telephone",
+          "radio",
+          "television",
+          "personal-computer",
+          "internet",
+          "mobile-phone",
+          "smartphone"
+        ]
+      }
+    }
+  ]
+}
