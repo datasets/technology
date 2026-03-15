@@ -28,20 +28,26 @@
     {
       "name": "us-technology-adoption-over-time",
       "title": "US Technology Adoption Over Time",
-      "specType": "simple",
       "resources": ["adoption-rates-wide"],
+      "specType": "vega-lite",
       "spec": {
-        "type": "line",
-        "group": "year",
-        "series": [
-          "telephone",
-          "radio",
-          "television",
-          "personal-computer",
-          "internet",
-          "mobile-phone",
-          "smartphone"
-        ]
+        "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+        "transform": [
+          { "fold": ["telephone", "radio", "television", "personal-computer", "internet", "mobile-phone", "smartphone"], "as": ["technology", "raw_value"] },
+          { "calculate": "toNumber(datum.raw_value)", "as": "value" },
+          { "filter": "isValid(datum.value) && datum.value > 0" }
+        ],
+        "mark": { "type": "line", "strokeWidth": 2 },
+        "encoding": {
+          "x": { "field": "year", "type": "quantitative", "title": "Year", "axis": { "format": "d", "grid": false } },
+          "y": { "field": "value", "type": "quantitative", "title": "Adoption (%)", "axis": { "grid": false } },
+          "color": { "field": "technology", "type": "nominal", "legend": { "title": "Technology" } },
+          "tooltip": [
+            { "field": "technology", "type": "nominal", "title": "Technology" },
+            { "field": "year", "type": "quantitative", "format": "d", "title": "Year" },
+            { "field": "value", "type": "quantitative", "format": ".1f", "title": "Adoption (%)" }
+          ]
+        }
       }
     }
   ]

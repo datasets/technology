@@ -57,7 +57,7 @@
             "name": "launch_year",
             "title": "Launch Year",
             "description": "Four-digit launch year, extracted from launch_date. Suitable for aggregation.",
-            "type": "integer"
+            "type": "number"
           },
           {
             "name": "object_type",
@@ -128,31 +128,31 @@
           {
             "name": "year",
             "title": "Year",
-            "type": "integer"
+            "type": "number"
           },
           {
             "name": "Payload",
             "title": "Payloads",
             "description": "Number of payloads launched.",
-            "type": "integer"
+            "type": "number"
           },
           {
             "name": "Rocket Body",
             "title": "Rocket Bodies",
             "description": "Number of rocket bodies (launch vehicle stages) tracked.",
-            "type": "integer"
+            "type": "number"
           },
           {
             "name": "Debris",
             "title": "Debris",
             "description": "Number of fragmentation debris pieces tracked.",
-            "type": "integer"
+            "type": "number"
           },
           {
             "name": "Component",
             "title": "Components",
             "description": "Number of payload components tracked.",
-            "type": "integer"
+            "type": "number"
           }
         ],
         "missingValues": [""]

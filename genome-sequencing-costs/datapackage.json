@@ -49,13 +49,26 @@
   "views": [
     {
       "name": "cost-per-genome",
-      "title": "Cost to sequence a human genome (USD)",
-      "resourceName": "sequencing-costs",
-      "specType": "simple",
+      "title": "Cost to sequence a human genome (USD, log scale)",
+      "resources": ["sequencing-costs"],
+      "specType": "vega-lite",
       "spec": {
-        "type": "line",
-        "group": "Date",
-        "series": ["Cost per Genome"]
+        "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+        "mark": { "type": "line", "point": { "filled": true, "size": 50 } },
+        "encoding": {
+          "x": { "field": "Date", "type": "temporal", "title": "Date" },
+          "y": {
+            "field": "Cost per Genome",
+            "type": "quantitative",
+            "title": "Cost per Genome (USD)",
+            "scale": { "type": "log" },
+            "axis": { "format": "$,.0f" }
+          },
+          "tooltip": [
+            { "field": "Date", "type": "temporal", "title": "Date" },
+            { "field": "Cost per Genome", "type": "quantitative", "format": "$,.2f", "title": "Cost per Genome" }
+          ]
+        }
       }
     }
   ]

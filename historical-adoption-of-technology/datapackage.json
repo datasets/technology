@@ -25,7 +25,7 @@
         "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
         "transform": [
           { "filter": "toNumber(datum.year) >= 1980" },
-          { "fold": ["cellphone", "internetuser", "tv", "telephone"], "as": ["technology", "raw_value"] },
+          { "fold": ["cellphone", "internetuser", "tv", "computer", "radio", "vehicle_car"], "as": ["technology", "raw_value"] },
           { "calculate": "toNumber(datum.raw_value)", "as": "value" },
           { "filter": "isValid(datum.value) && datum.value > 0" },
           { "aggregate": [{ "op": "sum", "field": "value", "as": "total" }], "groupby": ["year", "technology"] }

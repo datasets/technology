@@ -38,20 +38,21 @@
     {
       "name": "storage-pricing-over-time",
       "title": "Cloud Storage Pricing Over Time",
-      "specType": "simple",
-      "type": "graph",
-      "transform": [
-        {
-          "type": "filter",
-          "expressions": [
-            { "property": "provider", "in": ["aws", "gcp", "azure"] }
+      "resources": ["storage_pricing"],
+      "specType": "vega-lite",
+      "spec": {
+        "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+        "mark": { "type": "line", "point": { "filled": true, "size": 60 } },
+        "encoding": {
+          "x": { "field": "date", "type": "temporal", "title": "Date" },
+          "y": { "field": "price_per_gb_usd", "type": "quantitative", "title": "Price per GB (USD)" },
+          "color": { "field": "provider", "type": "nominal", "legend": { "title": "Provider" } },
+          "tooltip": [
+            { "field": "provider", "type": "nominal", "title": "Provider" },
+            { "field": "date", "type": "temporal", "title": "Date" },
+            { "field": "price_per_gb_usd", "type": "quantitative", "format": ".3f", "title": "Price/GB (USD)" }
           ]
         }
-      ],
-      "props": {
-        "x": "date",
-        "y": "price_per_gb_usd",
-        "group": "provider"
       }
     }
   ]
