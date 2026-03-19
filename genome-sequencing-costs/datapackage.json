@@ -62,7 +62,8 @@
           "label": "Cost per Genome (USD)",
           "type": "log",
           "tickFormat": "$,.0s",
-          "domain": [300, 200000000]
+          "domain": [300, 200000000],
+          "grid": false
         },
         "marks": [
           {
@@ -88,7 +89,7 @@
             "type": "line",
             "x": "Date",
             "y": "Cost per Genome",
-            "stroke": "#1D6996",
+            "stroke": "#374151",
             "sort": "Date",
             "tip": false
           },
@@ -96,7 +97,7 @@
             "type": "dot",
             "x": "Date",
             "y": "Cost per Genome",
-            "fill": "#1D6996",
+            "fill": "#374151",
             "r": 2.5,
             "opacity": 0.8,
             "tip": true
