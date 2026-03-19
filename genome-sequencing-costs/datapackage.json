@@ -49,26 +49,88 @@
   "views": [
     {
       "name": "cost-per-genome",
-      "title": "Cost to sequence a human genome (USD, log scale)",
+      "title": "Cost to Sequence a Human Genome",
+      "description": "From $95 million in 2001 to $525 today — a 181,000× reduction, 154× faster than Moore's Law. The 2008 arrival of next-generation sequencing caused costs to drop 9× in just 9 months. Since 2015, costs have plateaued around $500–1,500, suggesting diminishing returns from current technology.",
       "resources": ["sequencing-costs"],
-      "specType": "vega-lite",
+      "specType": "plot",
       "spec": {
-        "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-        "mark": { "type": "line", "point": { "filled": true, "size": 50 } },
-        "encoding": {
-          "x": { "field": "Date", "type": "temporal", "title": "Date", "axis": { "grid": false } },
-          "y": {
-            "field": "Cost per Genome",
-            "type": "quantitative",
-            "title": "Cost per Genome (USD)",
-            "scale": { "type": "log" },
-            "axis": { "format": "$,.0f", "grid": false }
+        "dateFields": ["Date"],
+        "height": 420,
+        "marginLeft": 80,
+        "x": { "label": null },
+        "y": {
+          "label": "Cost per Genome (USD)",
+          "type": "log",
+          "tickFormat": "$,.0s",
+          "domain": [300, 200000000]
+        },
+        "marks": [
+          {
+            "type": "ruleX",
+            "staticData": [{ "x": "2008-01-01" }],
+            "x": "x",
+            "stroke": "#9ca3af",
+            "strokeDasharray": "4,4",
+            "tip": false
           },
-          "tooltip": [
-            { "field": "Date", "type": "temporal", "title": "Date" },
-            { "field": "Cost per Genome", "type": "quantitative", "format": "$,.2f", "title": "Cost per Genome" }
-          ]
-        }
+          {
+            "type": "line",
+            "staticData": [
+              { "x": "2001-09-01", "y": 95263072 },
+              { "x": "2022-05-01", "y": 80909 }
+            ],
+            "x": "x", "y": "y",
+            "stroke": "#9ca3af",
+            "strokeDasharray": "5,4",
+            "tip": false
+          },
+          {
+            "type": "line",
+            "x": "Date",
+            "y": "Cost per Genome",
+            "stroke": "#1D6996",
+            "sort": "Date",
+            "tip": false
+          },
+          {
+            "type": "dot",
+            "x": "Date",
+            "y": "Cost per Genome",
+            "fill": "#1D6996",
+            "r": 2.5,
+            "opacity": 0.8,
+            "tip": true
+          },
+          {
+            "type": "text",
+            "staticData": [{ "x": "2008-03-01", "y": 50000000, "label": "Next-gen sequencing (2008)" }],
+            "x": "x", "y": "y", "text": "label",
+            "stroke": "#6b7280",
+            "fontSize": 11,
+            "textAnchor": "start"
+          },
+          {
+            "type": "text",
+            "staticData": [{ "x": "2014-01-01", "y": 2000000, "label": "Moore's Law trajectory" }],
+            "x": "x", "y": "y", "text": "label",
+            "stroke": "#9ca3af",
+            "fontSize": 11,
+            "textAnchor": "start"
+          },
+          {
+            "type": "text",
+            "staticData": [
+              { "x": "2008-08-01", "y": 900000, "label": "$1M" },
+              { "x": "2011-11-01", "y": 6800, "label": "$10K" },
+              { "x": "2019-03-01", "y": 860, "label": "$1K" }
+            ],
+            "x": "x", "y": "y", "text": "label",
+            "stroke": "#374151",
+            "fontSize": 10,
+            "textAnchor": "start",
+            "dx": 6
+          }
+        ]
       }
     }
   ]
